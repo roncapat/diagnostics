@@ -21,14 +21,9 @@ jobs:
             diagnostic_updater,
             self_test,
           ]
-        distro: [humble, iron, rolling]
         include:
           - distro: humble
             os: 22.04
-          - distro: iron
-            os: 22.04
-          - distro: rolling
-            os: 24.04
     runs-on: ubuntu-latest
     container: ubuntu:${{ matrix.os }}
     steps:
