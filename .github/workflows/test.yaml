@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - ros2
+      - ros2-humble
   schedule:
     # Run every week at 20:00 on Sunday
     - cron: "0 20 * * 0"
@@ -14,8 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package:
-          [
+        package: [
             diagnostic_aggregator,
             diagnostic_common_diagnostics,
             diagnostic_updater,
