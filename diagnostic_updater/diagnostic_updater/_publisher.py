@@ -67,7 +67,7 @@ class HeaderlessTopicDiagnostic(CompositeDiagnosticTask):
         CompositeDiagnosticTask.__init__(self, name + ' topic status')
         self.diag = diag
         self.freq = FrequencyStatus(freq)
-        self.addTask(self.freq)
+        self.add_task(self.freq)
         self.diag.add(self)
 
     def tick(self):
@@ -100,7 +100,7 @@ class TopicDiagnostic(HeaderlessTopicDiagnostic):
         """
         HeaderlessTopicDiagnostic.__init__(self, name, diag, freq)
         self.stamp = TimeStampStatus(stamp)
-        self.addTask(self.stamp)
+        self.add_task(self.stamp)
 
     def tick(self, stamp):
         """

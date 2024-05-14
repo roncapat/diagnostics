@@ -169,10 +169,10 @@ def main():
     # DiagnosticTask that can be used to create a DiagnosticTask from
     # a function. This will be useful when combining multiple diagnostic
     # tasks using a CompositeDiagnosticTask.
-    lower = diagnostic_updater.FunctionDiagnosticTask('Lower-bound check',
-                                                      check_lower_bound)
-    upper = diagnostic_updater.FunctionDiagnosticTask('Upper-bound check',
-                                                      check_upper_bound)
+    lower = diagnostic_updater.FunctionDiagnosticTask(
+        'Lower-bound check', check_lower_bound)
+    upper = diagnostic_updater.FunctionDiagnosticTask(
+        'Upper-bound check', check_upper_bound)
 
     # If you want to merge the outputs of two diagnostic tasks together, you
     # can create a CompositeDiagnosticTask, also a derived class from

@@ -66,7 +66,7 @@ typedef std::function<void (diagnostic_msgs::msg::DiagnosticStatus &)>
  *
  * Subclasses are provided for generating common diagnostic information.
  *
- * A DiagnosticTask has a name, and a function that is called to cleate a
+ * A DiagnosticTask has a name, and a function that is called to create a
  * DiagnosticStatusWrapper.
  */
 class DiagnosticTask

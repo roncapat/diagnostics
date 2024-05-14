@@ -59,7 +59,7 @@ class DiagnosticTask:
         """Construct a DiagnosticTask setting its name in the process."""
         self.name = name
 
-    def getName(self):
+    def get_name(self):
         """Return the name of the DiagnosticTask."""
         return self.name
 
@@ -133,7 +133,7 @@ class CompositeDiagnosticTask(DiagnosticTask):
         stat.summary(combined_summary)
         return stat
 
-    def addTask(self, t):
+    def add_task(self, t):
         """
         Add a child CompositeDiagnosticTask.
 
@@ -171,7 +171,7 @@ class DiagnosticTaskVector:
         self.tasks = []
         self.lock = threading.Lock()
 
-    def addedTaskCallback(self, task):
+    def added_task_callback(self, task):
         """
         Allow an action to be taken when a task is added.
 
@@ -195,12 +195,15 @@ class DiagnosticTaskVector:
         elif len(args) == 2:
             task = DiagnosticTaskVector.DiagnosticTaskInternal(
                 args[0], args[1])
+        else:
+            raise TypeError(
+                f'add() takes 1 or 2 arguments ({len(args)} given)')
 
         with self.lock:
             self.tasks.append(task)
-            self.addedTaskCallback(task)
+            self.added_task_callback(task)
 
-    def removeByName(self, name):
+    def remove_by_name(self, name):
         """
         Remove a task based on its name.
 
@@ -211,8 +214,8 @@ class DiagnosticTaskVector:
         """
         found = False
         with self.lock:
-            for i in range(len(self.tasks)):
-                if self.tasks[i].name == name:
+            for i, task in enumerate(self.tasks):
+                if task.name == name:
                     self.tasks.pop(i)
                     found = True
                     break
@@ -244,7 +247,7 @@ class Updater(DiagnosticTaskVector):
         self.timer = self.node.create_timer(self.__period, self.update)
 
         self.verbose = False
-        self.hwid = ''
+        self.hw_id = ''
         self.warn_nohwid_done = False
 
         self.use_fqn_parameter = 'diagnostic_updater.use_fqn'
@@ -256,7 +259,8 @@ class Updater(DiagnosticTaskVector):
                 self.use_fqn_parameter, False).value
 
         if self.__use_fqn:
-            self.node_name = '/'.join([self.node.get_namespace(), self.node.get_name()])
+            self.node_name = '/'.join([self.node.get_namespace(),
+                                      self.node.get_name()])
         else:
             self.node_name = self.node.get_name()
 
@@ -267,7 +271,7 @@ class Updater(DiagnosticTaskVector):
         Causes the diagnostics to update if the inter-update interval has
         been exceeded.
         """
-        warn_nohwid = len(self.hwid) == 0
+        warn_nohwid = len(self.hw_id) == 0
 
         status_vec = []
 
@@ -278,7 +282,7 @@ class Updater(DiagnosticTaskVector):
                 status.level = DiagnosticStatus.ERROR
                 status.name = task.name
                 status.message = 'No message was set'
-                status.hardware_id = self.hwid
+                status.hardware_id = self.hw_id
 
                 status = task.run(status)
 
@@ -289,9 +293,8 @@ class Updater(DiagnosticTaskVector):
 
                 if self.verbose and status.level != b'\x00':
                     self.node.get_logger().warn(
-                        'Non-zero diagnostic status. Name: %s, status\
-                        %s: %s' % (status.name, str(status.level),
-                                   status.message))
+                        f'Non-zero diagnostics status. Name: {status.name}, ' +
+                        f'status: {status.level}: {status.message}')
 
         if warn_nohwid and not self.warn_nohwid_done:
             self.node.get_logger().warn(
@@ -338,27 +341,13 @@ class Updater(DiagnosticTaskVector):
 
         self.publish(status_vec)
 
-    def setHardwareID(self, hwid):
+    def set_hw_id(self, hw_id):
         """Set the hardware ID for all the diagnostics."""
-        self.hwid = hwid
-
-    # TODO(Karsten1987) Re-enable this for eloquent
-    # def _check_diagnostic_period(self):
-    #     """Recheck the diagnostic_period on the parameter server."""
-    #     # This was getParamCached() call in the cpp code. i.e. it would
-    #     # throttle the actual call to the parameter server using a
-    #     # notification of change mechanism.
-    #     # This is not available in rospy. Hence I throttle the call to the
-    #     # parameter server using a standard timeout mechanism (4Hz)
-    #     now = self.clock.now()
-    #     if now >= self.last_time_period_checked:
-    #         # self.period = self.node.get_parameter(
-    #               self.period_parameter).value
-    #         self.last_time_period_checked = now
+        self.hw_id = hw_id
 
     def publish(self, msg):
         """Publish a single or a vector of diagnostic statuses."""
-        if not type(msg) is list:
+        if not isinstance(msg, list):
             msg = [msg]
 
         now = self.node.get_clock().now()
@@ -375,7 +364,7 @@ class Updater(DiagnosticTaskVector):
             da.status.append(db)
         self.publisher.publish(da)
 
-    def addedTaskCallback(self, task):
+    def added_task_callback(self, task):
         """Publish a task (called when added to the updater)."""
         stat = DiagnosticStatusWrapper()
         stat.name = task.name
