@@ -50,6 +50,8 @@ class NTPMonitor(Node):
                  do_self_test=True):
         """Initialize the NTPMonitor."""
         super().__init__(__class__.__name__)
+        self.declare_parameter('frequency', 10.0)
+        frequency = self.get_parameter('frequency').get_parameter_value().double_value
 
         self.ntp_hostname = ntp_hostname
         self.offset = offset
@@ -83,8 +85,8 @@ class NTPMonitor(Node):
 
         # we need to periodically republish this
         self.current_msg = None
-        self.pubtimer = self.create_timer(0.1, self.pubCB)
-        self.checktimer = self.create_timer(0.1, self.checkCB)
+        self.pubtimer = self.create_timer(1/frequency, self.pubCB)
+        self.checktimer = self.create_timer(1/frequency, self.checkCB)
 
     def pubCB(self):
         with self.mutex:
@@ -93,6 +95,7 @@ class NTPMonitor(Node):
 
     def checkCB(self):
         new_msg = DIAG.DiagnosticArray()
+        new_msg.header.stamp = self.get_clock().now().to_msg()
 
         st = self.ntp_diag(self.stat)
         if st is not None:
@@ -153,6 +156,9 @@ class NTPMonitor(Node):
 
 
 def ntp_monitor_main(argv=sys.argv[1:]):
+    # filter out ROS args
+    argv = argv[:argv.index('--ros-args')] if '--ros-args' in argv else argv
+
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--ntp_hostname',
