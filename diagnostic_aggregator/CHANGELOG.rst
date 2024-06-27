@@ -2,8 +2,8 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+3.2.1 (2024-06-27)
+------------------
 * Add add_analyzer functionality (`#329 <https://github.com/ros/diagnostics/issues/329>`_) (`#359 <https://github.com/ros/diagnostics/issues/359>`_)
 * Aggregator: publish diagnostics_toplevel_state immediately on every degradation (`#324 <https://github.com/ros/diagnostics/issues/324>`_) (`#355 <https://github.com/ros/diagnostics/issues/355>`_)
 * Contributors: Christian Henkel

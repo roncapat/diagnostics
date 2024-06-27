@@ -2,8 +2,8 @@
 Changelog for package self_test
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+3.2.1 (2024-06-27)
+------------------
 * Building in docker (`#335 <https://github.com/ros/diagnostics/issues/335>`_)
 * Contributors: Christian Henkel
 

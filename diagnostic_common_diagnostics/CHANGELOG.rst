@@ -2,8 +2,8 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+3.2.1 (2024-06-27)
+------------------
 * refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_ (`#365 <https://github.com/ros/diagnostics/issues/365>`_)
 * refactor(ram_monitor): ros2 port (`#338 <https://github.com/ros/diagnostics/issues/338>`_)
 * NTP monitor improvements (`#342 <https://github.com/ros/diagnostics/issues/342>`_) (`#350 <https://github.com/ros/diagnostics/issues/350>`_)
