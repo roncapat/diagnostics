@@ -104,7 +104,9 @@ endif()
 
 ament_python_install_package(${PROJECT_NAME})
 install(
-  FILES ${PROJECT_NAME}/example.py
+  FILES 
+    ${PROJECT_NAME}/example.py
+    ${PROJECT_NAME}/example_heartbeat.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
