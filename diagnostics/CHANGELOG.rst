@@ -2,6 +2,9 @@
 Changelog for package diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 4.0.1 (2024-06-27)
 ------------------
 
