@@ -2,8 +2,8 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.1 (2024-07-30)
+------------------
 * fixing pep257 problems introduced by `#334 <https://github.com/ros/diagnostics/issues/334>`_ (`#384 <https://github.com/ros/diagnostics/issues/384>`_) (`#392 <https://github.com/ros/diagnostics/issues/392>`_)
 * Fixing ntp launchtest (`#330 <https://github.com/ros/diagnostics/issues/330>`_) (`#391 <https://github.com/ros/diagnostics/issues/391>`_)
 * Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_) (`#383 <https://github.com/ros/diagnostics/issues/383>`_)

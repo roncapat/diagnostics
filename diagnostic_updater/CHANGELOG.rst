@@ -2,8 +2,8 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.1 (2024-07-30)
+------------------
 * Fix correctly exporting the library (`#388 <https://github.com/ros/diagnostics/issues/388>`_)
 * Contributors: Ramon Wijnands
 
