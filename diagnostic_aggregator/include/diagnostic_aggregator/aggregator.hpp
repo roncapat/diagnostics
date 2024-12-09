@@ -115,7 +115,7 @@ public:
    *\brief Constructor initializes with main prefix (ex: '/Robot') and custom node options
    */
   DIAGNOSTIC_AGGREGATOR_PUBLIC
-  Aggregator(const rclcpp::NodeOptions & options);
+  Aggregator(rclcpp::NodeOptions options);
 
 
   DIAGNOSTIC_AGGREGATOR_PUBLIC

@@ -59,7 +59,7 @@ using diagnostic_msgs::msg::DiagnosticStatus;
 Aggregator::Aggregator()
 : Aggregator(rclcpp::NodeOptions()) {}
 
-Aggregator::Aggregator(const rclcpp::NodeOptions & options)
+Aggregator::Aggregator(rclcpp::NodeOptions options)
 : n_(std::make_shared<rclcpp::Node>(
       "analyzers", "",
       options.allow_undeclared_parameters(true).
